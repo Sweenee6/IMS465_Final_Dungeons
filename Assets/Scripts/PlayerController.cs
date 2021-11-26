@@ -10,6 +10,9 @@ public class PlayerController : MonoBehaviour
     private float speed;
     private Vector3 direction;
 
+    [SerializeField] private float controllerDeadzone = 0.1f;
+    [SerializeField] private float rotateSmoothing = 1000f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,16 +27,8 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        /* if (rb.GetComponent<Rigidbody>().gravityScale == 0f)
-         {
-             rb.MovePosition(transform.position + (direction * speed * Time.deltaTime));
-         }
-         else
-         {
-             rb.AddForce(direction.normalized * 15f);
-         }*/
+        //move Player
         rb.AddForce(direction.normalized * 15f);
-
     }
 
     public void OnMove(InputValue val)
