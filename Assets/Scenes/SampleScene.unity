@@ -123,6 +123,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 23800000, guid: 15509c9d826c02c419b065feb3f3b68d, type: 2}
+--- !u!4 &176588019 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4499943252609129981, guid: c2205c8b8b67c2c44907ed9b64cc9328, type: 3}
+  m_PrefabInstance: {fileID: 1215187821}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &212492236
 GameObject:
   m_ObjectHideFlags: 0
@@ -237,7 +242,7 @@ GameObject:
   - component: {fileID: 288056906}
   m_Layer: 0
   m_Name: Goblin (1)
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -402,7 +407,7 @@ GameObject:
   - component: {fileID: 475073296}
   m_Layer: 0
   m_Name: Goblin
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -663,7 +668,7 @@ GameObject:
   - component: {fileID: 647834812}
   m_Layer: 0
   m_Name: Goblin (2)
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -810,6 +815,36 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 647834810}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &823146062
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 823146063}
+  m_Layer: 0
+  m_Name: ShootPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &823146063
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 823146062}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0, y: 0, z: 0.613}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 176588019}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &871562399
 GameObject:
   m_ObjectHideFlags: 0
@@ -1238,6 +1273,14 @@ PrefabInstance:
       propertyPath: speed
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 6866202550835327463, guid: c2205c8b8b67c2c44907ed9b64cc9328, type: 3}
+      propertyPath: FirePoint
+      value: 
+      objectReference: {fileID: 823146063}
+    - target: {fileID: 6866202550835327463, guid: c2205c8b8b67c2c44907ed9b64cc9328, type: 3}
+      propertyPath: SpellPrefab
+      value: 
+      objectReference: {fileID: 8350011274861404724, guid: 31155d1c661d8bb4f937e4ee058f40ac, type: 3}
     - target: {fileID: 6866202550835327468, guid: c2205c8b8b67c2c44907ed9b64cc9328, type: 3}
       propertyPath: m_UseGravity
       value: 1

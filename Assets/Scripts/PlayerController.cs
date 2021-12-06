@@ -21,6 +21,9 @@ public class PlayerController : MonoBehaviour
     private PlayerControls playerControls;
     private PlayerInput playerInput;
 
+    [SerializeField] private Transform FirePoint;
+    [SerializeField] private GameObject SpellPrefab = null;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -39,8 +42,6 @@ public class PlayerController : MonoBehaviour
     void handleInput()
     {
         //aim = playerControls.Player.Aim.ReadValue<Vector2>();
-        //movement = playerControls.Player.Move.ReadValue<Vector2>();
-        
     }
 
     private void FixedUpdate()
@@ -59,6 +60,9 @@ public class PlayerController : MonoBehaviour
 
     public void OnFire()
     {
+        Instantiate(SpellPrefab, FirePoint.position, FirePoint.rotation);
+        
+
       /* var rayColor = Color.red;
         var rayDist = 10.0f;
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.up, rayDist);
