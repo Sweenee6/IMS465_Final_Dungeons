@@ -10,16 +10,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float speed;
     private Vector3 direction;
+    [SerializeField] private int health = 10;
 
     [SerializeField] private float controllerDeadzone = 0.1f;
     [SerializeField] private float gamepadRotateSmoothing = 1000f;
 
     [SerializeField] private bool isGamepad;
-    private Vector3 AimMousePos;
     private Vector2 aim;
-    private Vector2 movement;
-    private PlayerControls playerControls;
-    private PlayerInput playerInput;
 
     [SerializeField] private Transform FirePoint;
     [SerializeField] private GameObject SpellPrefab = null;
@@ -28,27 +25,19 @@ public class PlayerController : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        //playerControls = new PlayerControls();
-        //playerInput = GetComponent<PlayerInput>();
     }
 
     // Update is called once per frame
     void Update()
     {
         handleRotation();
-        //handleInput();
-    }
 
-    void handleInput()
-    {
-        //aim = playerControls.Player.Aim.ReadValue<Vector2>();
     }
 
     private void FixedUpdate()
     {
         //move Player
         rb.MovePosition(transform.position + (direction * speed * Time.deltaTime));
-        //rb.AddForce(direction.normalized * 15f);
         
     }
 
@@ -78,15 +67,6 @@ public class PlayerController : MonoBehaviour
 
         Debug.DrawRay(transform.position, Vector2.up * rayDist, rayColor, 1.0f);
 
-        /*ray = new Ray(transform.position, Vector2.up);
-        var rayColor = Color.red;
-        var rayDist = 10.0f;
-        if (Physics2D.Raycast(ray., out var hit, rayDist))
-        {
-            rayColor = Color.green;
-            Destroy(hit.collider.GetComponent<MeshRenderer>());
-        }
-        Debug.DrawRay(ray.origin, ray.direction * rayDist, rayColor, 1.0f);
     */
     }
 
@@ -94,7 +74,7 @@ public class PlayerController : MonoBehaviour
     {
         if (isGamepad)
         {
-            //Rotate player
+            //Rotate player with sticks
             if (Mathf.Abs(aim.x) > controllerDeadzone || Mathf.Abs(aim.y) > controllerDeadzone)
             {
                 Vector3 playerDirection = Vector3.right * aim.x + Vector3.forward * aim.y;
@@ -106,14 +86,9 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
-        else
+        else // if not gamepad
         {
-            /*Vector3 lookDir = AimMousePos - rb.position;
-            float angle = Mathf.Atan2(lookDir.z, lookDir.x) * Mathf.Rad2Deg - 90f;*/
-
-
-            //Ray ray = Camera.main.ScreenPointToRay(aim);
-            //Ray ray = cam.ScreenPointToRay(aim);
+            // rotate with mouse position
             Ray ray = cam.ScreenPointToRay(Mouse.current.position.ReadValue());
             Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
             float rayDistance;
@@ -122,67 +97,13 @@ public class PlayerController : MonoBehaviour
                 Vector3 point = ray.GetPoint(rayDistance);
                 point.y = transform.position.y;
                 rb.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(point - transform.position), gamepadRotateSmoothing * 10 * Time.deltaTime);
-                //rb.rotation = Quaternion.LookRotation(point - transform.position);
-
-                //lookAt(point);
             }
-            
-            
-            
-                
-                /*float rayDistance;
-            if (groundPlane.Raycast(ray, out rayDistance))
-            {
-                Vector3 point = ray.GetPoint(rayDistance);
-           
-                //lookAt(point);
-            }*/
         }
     }
 
     public void OnAim(InputValue val)
     {
-
         aim = val.Get<Vector2>();
-
-        if (isGamepad)
-        {
-            AimMousePos = cam.ScreenToWorldPoint(new Vector3(aim.x, 0f, aim.y));
-        }
-        
-       /* if (isGamepad)
-        {
-            //Rotate player
-            if (Mathf.Abs(aim.x) > controllerDeadzone || Mathf.Abs(aim.y) > controllerDeadzone)
-            {
-                Vector3 playerDirection = Vector3.right * aim.x + Vector3.forward * aim.y;
-                if (playerDirection.sqrMagnitude > 0.0f)
-                {
-                    Quaternion newRotation = Quaternion.LookRotation(playerDirection, Vector3.up);
-                    
-                    rb. = Quaternion.RotateTowards(transform.rotation, newRotation, rotateSmoothing * Time.deltaTime);
-                }
-            }
-        }
-        else
-        {
-            *//*Ray ray = Camera.main.ScreenPointToRay(aim);
-            Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
-            float rayDistance;
-            if (groundPlane.Raycast(ray, out rayDistance))
-            {
-                Vector3 point = ray.GetPoint(rayDistance);
-                lookAt(point);
-            }*//*
-
-            
-
-            AimMousePos = Camera.main.ScreenToWorldPoint(new Vector3(aim.x, 0.0f, aim.y));
-
-            Vector3 direction = AimMousePos - transform.position;
-            Quaternion angle = Quaternion.LookRotation(direction);
-            rb.rotation = angle;
-        }*/
     }
 
     private void lookAt(Vector3 lookpoint)
@@ -191,7 +112,12 @@ public class PlayerController : MonoBehaviour
         transform.LookAt(heightCorrectedPoint);
     }
 
-    public void OnDeviceChange(PlayerInput pi)
+    public void Damage(int damageAmount)
+    {
+        health = health - damageAmount;
+    }
+
+    public void OnControlsChanged(PlayerInput pi)
     {
         isGamepad = pi.currentControlScheme.Equals("Gamepad") ? true : false;
     }
