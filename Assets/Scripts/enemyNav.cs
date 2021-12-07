@@ -45,6 +45,13 @@ public class enemyNav : MonoBehaviour
             // Create damage number
             var EnemyDamNum = (GameObject) Instantiate(damageNumber, new Vector3(transform.position.x, damageNumber.transform.position.y, transform.position.z), damageNumber.transform.rotation);
             EnemyDamNum.GetComponent<FloatingNumbers>().damageNumber = damageAmount;
+
+            //If no health destroy enemy
+            if(enemyHealth <= 0)
+            {
+                Destroy(this.gameObject);
+            }
+
         }
         else if (collision.tag == "Player")
         {
