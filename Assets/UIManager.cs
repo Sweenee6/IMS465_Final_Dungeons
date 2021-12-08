@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
-    private int playerhealth = 5;
+    private int playerhealth = 10;
     [SerializeField] private Text healthDisplay = null;
     private int goldScore = 0;
     [SerializeField] private Text goldDisplay = null;

@@ -12,6 +12,8 @@ public class enemyNav : MonoBehaviour
     [SerializeField] private GameObject damageNumber;
     [SerializeField] private int enemyHealth = 5;
 
+    [SerializeField] private GameObject goldDrop = null;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -49,6 +51,7 @@ public class enemyNav : MonoBehaviour
             //If no health destroy enemy
             if(enemyHealth <= 0)
             {
+                Instantiate(goldDrop, transform.position, transform.rotation);
                 Destroy(this.gameObject);
             }
 

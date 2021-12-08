@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7906968312788354513, guid: c1b393282922f8c46a1c492781cf42ca, type: 3}
       propertyPath: m_Name
-      value: BigGoblin
+      value: BigGoblin Variant
       objectReference: {fileID: 0}
     - target: {fileID: 7906968312788354517, guid: c1b393282922f8c46a1c492781cf42ca, type: 3}
       propertyPath: m_RootOrder
@@ -63,6 +63,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7906968312788354519, guid: c1b393282922f8c46a1c492781cf42ca, type: 3}
+      propertyPath: goldDrop
+      value: 
+      objectReference: {fileID: 4280025723019078096, guid: f715d1621ecbfdb47927ae933150dc15, type: 3}
     - target: {fileID: 7906968312788354519, guid: c1b393282922f8c46a1c492781cf42ca, type: 3}
       propertyPath: enemyHealth
       value: 30
