@@ -18,13 +18,14 @@ public class MovingObsticle : MonoBehaviour
     {
         rb.MovePosition(transform.position + (direction * speed * Time.deltaTime));
     }
-    private void OnTriggerEnter(Collider other)
+
+    private void OnCollisionEnter(Collision collision)
     {
-        //if a wall is hit flip direction
-        if(other.tag == "Wall")
+        if (collision.collider.tag == "Wall")
         {
-            Debug.Log("Wall");
+            //flip direction when hitting a wall
             direction = -direction;
         }
     }
+
 }
