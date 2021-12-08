@@ -21,10 +21,16 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform FirePoint;
     [SerializeField] private GameObject SpellPrefab = null;
 
+    private UIManager UI = null;
+    //private SpawnManager SM = null;
+    //private GameManager GM = null;
+
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
+        UI = GameObject.Find("Canvas").GetComponent<UIManager>();
         rb = GetComponent<Rigidbody>();
+        UI.UpdateHealth(health);
     }
 
     // Update is called once per frame
@@ -115,6 +121,7 @@ public class PlayerController : MonoBehaviour
     public void Damage(int damageAmount)
     {
         health = health - damageAmount;
+        UI.UpdateHealth(health);
     }
 
     public void OnControlsChanged(PlayerInput pi)
