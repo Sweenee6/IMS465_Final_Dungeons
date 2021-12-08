@@ -20,6 +20,8 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private Transform FirePoint;
     [SerializeField] private GameObject SpellPrefab = null;
+    private float fireRate = 0.25f; // slowdown
+    private float canFire = 0.05f; // elapsed time
 
     private UIManager UI = null;
     //private SpawnManager SM = null;
@@ -55,8 +57,12 @@ public class PlayerController : MonoBehaviour
 
     public void OnFire()
     {
-        Instantiate(SpellPrefab, FirePoint.position, FirePoint.rotation);
-        
+        if (Time.time > canFire)
+        {
+            Instantiate(SpellPrefab, FirePoint.position, FirePoint.rotation);
+
+            canFire = Time.time + fireRate; //shot delay
+        }
 
       /* var rayColor = Color.red;
         var rayDist = 10.0f;
