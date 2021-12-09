@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     private float speed;
     private Vector3 direction;
     [SerializeField] private int health = 10;
+    [SerializeField] private Transform startPosition;
 
     [SerializeField] private float controllerDeadzone = 0.1f;
     [SerializeField] private float gamepadRotateSmoothing = 1000f;
@@ -128,6 +129,13 @@ public class PlayerController : MonoBehaviour
     public void Damage(int damageAmount)
     {
         health = health - damageAmount;
+
+        if (health <= 0)
+        {
+            transform.position = startPosition.position;
+            health = 10;
+        }
+
         UI.UpdateHealth(health, playerNum);
     }
 
