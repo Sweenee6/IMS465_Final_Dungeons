@@ -129,7 +129,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 7906968312788354518}
-  player: {fileID: 0}
+  player:
+  - {fileID: 0}
+  - {fileID: 0}
   damageNumber: {fileID: 6063584674116710620, guid: aa17a2fa00ef43a4ba4dec57e5571cae, type: 3}
   enemyHealth: 5
   goldDrop: {fileID: 4867740065906074230, guid: 1760d39a947edde4eb120467f3219a2d, type: 3}

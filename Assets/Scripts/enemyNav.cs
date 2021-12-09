@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class enemyNav : MonoBehaviour
 {
     [SerializeField] private NavMeshAgent enemy;
-    public Transform player;
+    [SerializeField] private Transform[] player;
     private Rigidbody rb;
 
     [SerializeField] private GameObject damageNumber;
@@ -18,13 +18,21 @@ public class enemyNav : MonoBehaviour
     void Start()
     {
         rb = this.GetComponent<Rigidbody>();
-        //player = GameObject.Find("Player").transform;
+        player[0] = GameObject.Find("Player1").transform;
+        player[1] = GameObject.Find("Player2").transform;
     }
 
     // Update is called once per frame
     void Update()
     {
-        enemy.SetDestination(player.position);
+        int target = 0;
+
+        if (Vector3.Distance(player[1].position, transform.position) < Vector3.Distance(player[0].position, transform.position))
+        {
+            target = 1;
+        }
+
+        enemy.SetDestination(player[target].position);
 
        /* if (player != null)
         {

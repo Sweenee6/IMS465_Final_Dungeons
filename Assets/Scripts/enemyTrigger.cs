@@ -16,7 +16,7 @@ public class enemyTrigger : MonoBehaviour
             {
                 var enemyClone = (GameObject)Instantiate(enemyPrefab, enemySpawnPoints[i].position, Quaternion.identity);
                 // Enemies target player that spawned them
-                enemyClone.GetComponent<enemyNav>().player = collision.transform;
+                //enemyClone.GetComponent<enemyNav>().player = collision.transform;
          
             }
             // disable once used
