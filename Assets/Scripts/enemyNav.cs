@@ -11,6 +11,14 @@ public class enemyNav : MonoBehaviour
 
     [SerializeField] private GameObject damageNumber;
     [SerializeField] private int enemyHealth = 5;
+    [SerializeField] private int phase2Health = 0; // set to zero if no phase 2
+    [SerializeField] private GameObject shootpoint = null;
+    [SerializeField] private GameObject phase2projectile = null;
+    [SerializeField] private float throwForce = 0f;
+    [SerializeField] private bool Phase2 = false;
+    private float timebetweenShots;
+    [SerializeField] private float startTimeBtwShots = 20f;
+    
 
     [SerializeField] private GameObject goldDrop = null;
 
@@ -20,6 +28,9 @@ public class enemyNav : MonoBehaviour
         rb = this.GetComponent<Rigidbody>();
         player[0] = GameObject.Find("Player1").transform;
         player[1] = GameObject.Find("Player2").transform;
+
+        //timebetweenShots = startTimeBtwShots;
+        timebetweenShots = 0f;
     }
 
     // Update is called once per frame
@@ -33,6 +44,23 @@ public class enemyNav : MonoBehaviour
         }
 
         enemy.SetDestination(player[target].position);
+
+        if (Phase2)
+        {
+            if (timebetweenShots <= 0)
+            {
+                //launch enemies at players
+                var launchClone = (GameObject)Instantiate(phase2projectile, shootpoint.transform.position, shootpoint.transform.rotation);
+                launchClone.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * throwForce, ForceMode.Impulse);
+
+                timebetweenShots = startTimeBtwShots;//reset shot timer
+
+            } else
+            {
+                timebetweenShots -= Time.deltaTime;
+            }
+            
+        }
 
        /* if (player != null)
         {
@@ -56,8 +84,12 @@ public class enemyNav : MonoBehaviour
             var EnemyDamNum = (GameObject) Instantiate(damageNumber, new Vector3(transform.position.x, damageNumber.transform.position.y, transform.position.z), damageNumber.transform.rotation);
             EnemyDamNum.GetComponent<FloatingNumbers>().damageNumber = damageAmount;
 
+            if (enemyHealth <= phase2Health)
+            {
+                Phase2 = true;
+            }
             //If no health destroy enemy
-            if(enemyHealth <= 0)
+            if (enemyHealth <= 0)
             {
                 Instantiate(goldDrop, transform.position, transform.rotation);
                 Destroy(this.gameObject);
