@@ -28,7 +28,8 @@ public class goldPile : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            UI.UpdateScore(goldNum);
+            int pIndex = other.GetComponent<PlayerController>().playerNum;
+            UI.UpdateScore(goldNum, pIndex);
             Destroy(this.gameObject);
         }
     }

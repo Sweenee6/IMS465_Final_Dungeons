@@ -5,9 +5,9 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     private int playerhealth = 10;
-    [SerializeField] private Text healthDisplay = null;
-    private int goldScore = 0;
-    [SerializeField] private Text goldDisplay = null;
+    [SerializeField] private Text[] healthDisplay = null;
+    private int[] goldScore = new int[] {0,0};
+    [SerializeField] private Text[] goldDisplay = null;
 
     //[SerializeField] private GameObject TitleScreen = null;
 
@@ -18,16 +18,16 @@ public class UIManager : MonoBehaviour
 
     }
 
-    public void UpdateHealth(int health)
+    public void UpdateHealth(int health, int pIndex)
     {
         playerhealth = health;
-        healthDisplay.text = "Health: " + playerhealth;
+        healthDisplay[pIndex].text = "Health: " + playerhealth;
     }
 
-    public void UpdateScore(int pickup)
+    public void UpdateScore(int pickup, int pIndex)
     {
-        goldScore += pickup;
-        goldDisplay.text = "Gold: " + goldScore;
+        goldScore[pIndex] += pickup;
+        goldDisplay[pIndex].text = "Gold: " + goldScore[pIndex];
 
         //CheckForHighScore();
     }

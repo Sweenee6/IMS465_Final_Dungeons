@@ -58,14 +58,14 @@ public class enemyNav : MonoBehaviour
         }
         else if (collision.tag == "Player")
         {
-            PlayerController P = player.GetComponent<PlayerController>();
+            PlayerController P = collision.GetComponent<PlayerController>();
             if (P != null)
             {
                 int playerDamage = Random.Range(0, 5);
                 P.Damage(playerDamage); // player takes damage 
                 
                 //Create Player Damage Number
-                var PlayerDamNum = (GameObject)Instantiate(damageNumber, new Vector3(player.position.x, damageNumber.transform.position.y, player.position.z), damageNumber.transform.rotation);
+                var PlayerDamNum = (GameObject)Instantiate(damageNumber, new Vector3(collision.transform.position.x, damageNumber.transform.position.y, collision.transform.position.z), damageNumber.transform.rotation);
                 PlayerDamNum.GetComponent<FloatingNumbers>().damageNumber = playerDamage;
 
                 //Destroy(this.gameObject); // enemy

@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    public int playerNum;
     private Rigidbody rb;
     [SerializeField] private Camera cam;
     [SerializeField]
@@ -32,7 +33,7 @@ public class PlayerController : MonoBehaviour
     {
         UI = GameObject.Find("Canvas").GetComponent<UIManager>();
         rb = GetComponent<Rigidbody>();
-        UI.UpdateHealth(health);
+        UI.UpdateHealth(health, playerNum);
     }
 
     // Update is called once per frame
@@ -127,7 +128,7 @@ public class PlayerController : MonoBehaviour
     public void Damage(int damageAmount)
     {
         health = health - damageAmount;
-        UI.UpdateHealth(health);
+        UI.UpdateHealth(health, playerNum);
     }
 
     public void OnControlsChanged(PlayerInput pi)
