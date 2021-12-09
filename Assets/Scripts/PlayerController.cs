@@ -143,5 +143,4 @@ public class PlayerController : MonoBehaviour
     {
         isGamepad = pi.currentControlScheme.Equals("Gamepad") ? true : false;
     }
-
 }

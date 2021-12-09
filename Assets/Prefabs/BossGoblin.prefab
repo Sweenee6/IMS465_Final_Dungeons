@@ -30,6 +30,19 @@ Transform:
   m_Father: {fileID: 9123463279920664145}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-2392387822913231815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9123463279920664149}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5604db33b8d55754ab94fd18bc6612ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  winText: {fileID: 0}
 --- !u!1001 &1379856625685810052
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -63,15 +76,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7906968312788354517, guid: c1b393282922f8c46a1c492781cf42ca, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 47.82917
+      value: 37.900543
       objectReference: {fileID: 0}
     - target: {fileID: 7906968312788354517, guid: c1b393282922f8c46a1c492781cf42ca, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.7800007
+      value: 0.7800064
       objectReference: {fileID: 0}
     - target: {fileID: 7906968312788354517, guid: c1b393282922f8c46a1c492781cf42ca, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 9.60031
+      value: 6.341877
       objectReference: {fileID: 0}
     - target: {fileID: 7906968312788354517, guid: c1b393282922f8c46a1c492781cf42ca, type: 3}
       propertyPath: m_LocalRotation.w
@@ -135,6 +148,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c1b393282922f8c46a1c492781cf42ca, type: 3}
+--- !u!1 &9123463279920664149 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7906968312788354513, guid: c1b393282922f8c46a1c492781cf42ca, type: 3}
+  m_PrefabInstance: {fileID: 1379856625685810052}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &9123463279920664145 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7906968312788354517, guid: c1b393282922f8c46a1c492781cf42ca, type: 3}
