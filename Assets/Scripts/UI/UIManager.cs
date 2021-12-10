@@ -38,4 +38,11 @@ public class UIManager : MonoBehaviour
     {
         victoryText.SetActive(true);
     }
+
+    public void showPlayerUI(int playerNum)
+    {
+        //show player health and score when they join
+        healthDisplay[playerNum].gameObject.SetActive(true);
+        goldDisplay[playerNum].gameObject.SetActive(true);
+    }
 }

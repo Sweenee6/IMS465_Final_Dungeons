@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
     private float speed;
     private Vector3 direction;
     [SerializeField] private int health = 10;
-    [SerializeField] private Transform startPosition;
+    public Transform startPosition;
 
     [SerializeField] private float controllerDeadzone = 0.1f;
     [SerializeField] private float gamepadRotateSmoothing = 1000f;
@@ -27,15 +27,24 @@ public class PlayerController : MonoBehaviour
 
     private UIManager UI = null;
     private objectPooler objPooler;
-
-    //private GameManager GM = null;
+    private PlayerInput pi;
+    private gameManager GM = null;
 
     void Awake()
     {
+        GM = gameManager.Instance;
         UI = GameObject.Find("Canvas").GetComponent<UIManager>();
         rb = GetComponent<Rigidbody>();
         UI.UpdateHealth(health, playerNum);
         objPooler = objectPooler.Instance;
+        pi = GetComponent<PlayerInput>();
+        isGamepad = pi.currentControlScheme.Equals("Gamepad") ? true : false;
+    }
+
+    private void Start()
+    {
+        GM.OnPlayerJoined(gameObject);//Set player values
+        transform.position = startPosition.position;//Start at spawn
     }
 
     // Update is called once per frame

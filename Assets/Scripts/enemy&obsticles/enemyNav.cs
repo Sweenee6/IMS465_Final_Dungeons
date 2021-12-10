@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class enemyNav : MonoBehaviour, IPooledObject
 {
     [SerializeField] private NavMeshAgent enemy;
-    [SerializeField] private Transform[] player;
+    //[SerializeField] private Transform[] player;
     private Rigidbody rb;
 
     [SerializeField] private GameObject damageNumber;
@@ -20,6 +20,7 @@ public class enemyNav : MonoBehaviour, IPooledObject
     [SerializeField] private float startTimeBtwShots = 20f;
 
     private objectPooler objPooler;
+    private gameManager GM;
 
     [SerializeField] private string goldDrop = null;
 
@@ -30,11 +31,12 @@ public class enemyNav : MonoBehaviour, IPooledObject
     void Awake()
     {
         rb = this.GetComponent<Rigidbody>();
-        player[0] = GameObject.Find("Player").transform;
-        player[1] = GameObject.Find("Player2").transform;
+        GM = gameManager.Instance;
+        /*player[0] = GameObject.Find("Player").transform;
+        player[1] = GameObject.Find("Player2").transform;*/
         if (isBoss){ UI = GameObject.Find("Canvas").GetComponent<UIManager>(); }
         objPooler = objectPooler.Instance;
-
+        
 
         //timebetweenShots = startTimeBtwShots;
         timebetweenShots = 0f;
@@ -52,14 +54,40 @@ public class enemyNav : MonoBehaviour, IPooledObject
     // Update is called once per frame
     void Update()
     {
-        int target = 0;
-
-        if (Vector3.Distance(player[1].position, transform.position) < Vector3.Distance(player[0].position, transform.position))
+        var pTransforms = GM.playerTransfroms;
+        if (pTransforms.Length > 0)
         {
-            target = 1;
-        }
+            Transform closestPlayer = pTransforms[0];
+            float dist = Vector3.Distance(transform.position, pTransforms[0].position);
+            
+            for(int i=0; i < pTransforms.Length; i++)
+            {
+                if (pTransforms[i] != null)
+                {
+                    var tempDist = Vector3.Distance(transform.position, pTransforms[i].position);
 
-        enemy.SetDestination(player[target].position);
+                    if (tempDist < dist)
+                    {
+                        closestPlayer = pTransforms[i];
+                        dist = tempDist;
+                    }
+                }
+            }
+            if (closestPlayer != null)
+            {
+                enemy.SetDestination(closestPlayer.position);
+            }
+
+            /*int target = 0;
+
+            if (Vector3.Distance(player[1].position, transform.position) < Vector3.Distance(player[0].position, transform.position))
+            {
+                target = 1;
+            }
+
+            enemy.SetDestination(player[target].position);*/
+
+        }
 
         if (Phase2)
         {
