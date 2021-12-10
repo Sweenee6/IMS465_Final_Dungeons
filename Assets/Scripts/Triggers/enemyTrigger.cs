@@ -5,7 +5,14 @@ using UnityEngine;
 public class enemyTrigger : MonoBehaviour
 {
     [SerializeField] private Transform[] enemySpawnPoints;
-    [SerializeField] private GameObject enemyPrefab;
+    [SerializeField] private string enemyTag;
+
+    private objectPooler objPooler;
+
+    private void Start()
+    {
+        objPooler = objectPooler.Instance;
+    }
 
     private void OnTriggerEnter(Collider collision)
     {
@@ -14,10 +21,14 @@ public class enemyTrigger : MonoBehaviour
             // Spawn Enemies at Spawn points
             for (int i = 0; i < enemySpawnPoints.Length; i++)
             {
-                var enemyClone = (GameObject)Instantiate(enemyPrefab, enemySpawnPoints[i].position, Quaternion.identity);
+                GameObject enemyClone = objPooler.SpawnFromPool(enemyTag, enemySpawnPoints[i].position, Quaternion.identity);
+
+                enemyClone.transform.position = enemySpawnPoints[i].position;
+                //var enemyClone = (GameObject)Instantiate(enemyPrefab, enemySpawnPoints[i].position, Quaternion.identity);
+
                 // Enemies target player that spawned them
                 //enemyClone.GetComponent<enemyNav>().player = collision.transform;
-         
+
             }
             // disable once used
             this.gameObject.SetActive(false);

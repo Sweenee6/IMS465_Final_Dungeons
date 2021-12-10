@@ -8,7 +8,7 @@ public class MovingObsticle : MonoBehaviour
     [SerializeField] private float speed = 5.0f;
     [SerializeField] private Vector3 direction;
 
-    void Start()
+    void Awake()
     {
         rb = GetComponent<Rigidbody>();
     }

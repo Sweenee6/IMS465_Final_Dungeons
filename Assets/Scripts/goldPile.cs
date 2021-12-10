@@ -2,19 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class goldPile : MonoBehaviour
+public class goldPile : MonoBehaviour, IPooledObject
 {
     [SerializeField] private GameObject[] goldPieces;
     [SerializeField] private int goldMin;
     private int goldNum;
 
     private UIManager UI = null;
+    private objectPooler objPooler;
 
     // Start is called before the first frame update
     void Start()
     {
         UI = GameObject.Find("Canvas").GetComponent<UIManager>();
+        objPooler = objectPooler.Instance;
 
+        
+    }
+    public void OnObjectSpawn()
+    {
         goldNum = Random.Range(goldMin, goldPieces.Length);
 
         // show only the amount of gold as in the gold number
@@ -30,7 +36,8 @@ public class goldPile : MonoBehaviour
         {
             int pIndex = other.GetComponent<PlayerController>().playerNum;
             UI.UpdateScore(goldNum, pIndex);
-            Destroy(this.gameObject);
+            this.gameObject.SetActive(false);
+            //Destroy(this.gameObject);
         }
     }
 }

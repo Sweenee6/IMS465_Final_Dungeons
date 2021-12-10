@@ -2,20 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpellBlast : MonoBehaviour
+public class SpellBlast : MonoBehaviour, IPooledObject
 {
 
     private Rigidbody rb;
     [SerializeField] private float force = 10.0f;
-
-    // Start is called before the first frame update
-    void Start()
+  
+        private void Awake()
     {
-        //get rigidbody and apply force
         rb = GetComponent<Rigidbody>();
-        rb.AddRelativeForce(Vector3.forward * force, ForceMode.Impulse);
-        
     }
 
+    public void OnObjectSpawn()
+    {
+        rb.velocity = Vector3.zero;
+        //apply force
 
+        /*Vector3 v = (launcherPos.position - transform.position).normalized * force;
+        rb.AddForce(v, ForceMode.Impulse);*/
+
+        rb.rotation = transform.rotation;
+        rb.AddRelativeForce(Vector3.forward * force, ForceMode.Impulse);
+
+    }
+
+  /*  private void OnDisable()
+    {
+        rb.transform.rotation = Quaternion.Euler(Vector3.zero);
+        objPooler.poolD.Requeue(gameObject);
+    }*/
 }

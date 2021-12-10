@@ -2,24 +2,37 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DestroyOverTime : MonoBehaviour
+public class DestroyOverTime : MonoBehaviour, IPooledObject
 {
     [SerializeField] private float timeToDestroy;
+    private float timer;
+    private objectPooler objPooler;
 
-    // Start is called before the first frame update
     void Start()
     {
-        
+        objPooler = objectPooler.Instance;
+        timer = timeToDestroy;
+    }
+
+    public void OnObjectSpawn()
+    {
+        timer = timeToDestroy;
+        this.gameObject.SetActive(true);
     }
 
     // Update is called once per frame
     void Update()
     {
-        timeToDestroy -= Time.deltaTime;
+        timer -= Time.deltaTime;
 
-        if (timeToDestroy <= 0)
+        if (timer <= 0)
         {
-            Destroy(gameObject);
+            //Destroy(gameObject);
+            //requeue and hide
+
+             gameObject.SetActive(false);
+            //objPooler.poolDictionary["spell"].Enqueue(gameObject);
         }
     }
+    
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class enemyNav : MonoBehaviour
+public class enemyNav : MonoBehaviour, IPooledObject
 {
     [SerializeField] private NavMeshAgent enemy;
     [SerializeField] private Transform[] player;
@@ -13,24 +13,36 @@ public class enemyNav : MonoBehaviour
     [SerializeField] private int enemyHealth = 5;
     [SerializeField] private int phase2Health = 0; // set to zero if no phase 2
     [SerializeField] private GameObject shootpoint = null;
-    [SerializeField] private GameObject phase2projectile = null;
+    [SerializeField] private string phase2projectile = null;
     [SerializeField] private float throwForce = 0f;
     [SerializeField] private bool Phase2 = false;
     private float timebetweenShots;
     [SerializeField] private float startTimeBtwShots = 20f;
-    
 
-    [SerializeField] private GameObject goldDrop = null;
+    private objectPooler objPooler;
+
+    [SerializeField] private string goldDrop = null;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         rb = this.GetComponent<Rigidbody>();
         player[0] = GameObject.Find("Player1").transform;
         player[1] = GameObject.Find("Player2").transform;
 
+        objPooler = objectPooler.Instance;
+
         //timebetweenShots = startTimeBtwShots;
         timebetweenShots = 0f;
+    }
+
+    public void OnObjectSpawn()
+    {
+        enemy.Warp(transform.position);
+
+        rb.rotation = transform.rotation;
+        //rb.position = transform.position;
+        //transform.position = Vector3.zero;
     }
 
     // Update is called once per frame
@@ -47,10 +59,11 @@ public class enemyNav : MonoBehaviour
 
         if (Phase2)
         {
-            if (timebetweenShots <= 0)
+            if (timebetweenShots <= 0 && shootpoint!=null)
             {
                 //launch enemies at players
-                var launchClone = (GameObject)Instantiate(phase2projectile, shootpoint.transform.position, shootpoint.transform.rotation);
+                //var launchClone = (GameObject)Instantiate(phase2projectile, shootpoint.transform.position, shootpoint.transform.rotation);
+                var launchClone = objPooler.SpawnFromPool(phase2projectile, shootpoint.transform.position, shootpoint.transform.rotation);
                 launchClone.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * throwForce, ForceMode.Impulse);
 
                 timebetweenShots = startTimeBtwShots;//reset shot timer
@@ -74,8 +87,10 @@ public class enemyNav : MonoBehaviour
     {
         if(collision.tag == "Projectile")
         {
-            Destroy(collision.gameObject); //Fireball and acidblast
-                                           //Destroy(this.gameObject); // enemy
+            //Destroy(collision.gameObject); //Fireball and acidblast
+            collision.gameObject.SetActive(false);
+            //Destroy(this.gameObject); // enemy
+            
             // Random Damage to Enemy
             int damageAmount = Random.Range(1, 5);
             enemyHealth = enemyHealth - damageAmount;
@@ -91,8 +106,9 @@ public class enemyNav : MonoBehaviour
             //If no health destroy enemy
             if (enemyHealth <= 0)
             {
-                Instantiate(goldDrop, transform.position, transform.rotation);
-                Destroy(this.gameObject);
+                objPooler.SpawnFromPool(goldDrop, transform.position, transform.rotation);
+                this.gameObject.SetActive(false);
+                //Destroy(this.gameObject);
             }
 
         }

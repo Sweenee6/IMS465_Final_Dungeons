@@ -5,7 +5,13 @@ using UnityEngine;
 public class goldTrigger : MonoBehaviour
 {
     [SerializeField] private Transform[] spawnPoints;
-    [SerializeField] private GameObject goldPrefab;
+    [SerializeField] private string goldTag;
+    private objectPooler objPooler;
+
+    private void Start()
+    {
+        objPooler = objectPooler.Instance;
+    }
 
     private void OnTriggerEnter(Collider collision)
     {
@@ -14,7 +20,7 @@ public class goldTrigger : MonoBehaviour
             // Spawn Enemies at Spawn points
             for (int i = 0; i < spawnPoints.Length; i++)
             {
-               Instantiate(goldPrefab, spawnPoints[i].position, Quaternion.identity);
+                objPooler.SpawnFromPool(goldTag, spawnPoints[i].position, Quaternion.identity);
             }
             // disable once used
             this.gameObject.SetActive(false);

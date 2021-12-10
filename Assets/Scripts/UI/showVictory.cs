@@ -7,10 +7,8 @@ public class showVictory : MonoBehaviour
 {
     [SerializeField] private Text winText;
 
-    private void Start()
+    private void Awake()
     {
-        //GameObject canvas = GameObject.Find("Canvas");
-        //winText = canvas.transform.FindChild("WinText").GetComponent<GameObject>;
         winText = GameObject.Find("WinText").GetComponent<Text>();
     }
 

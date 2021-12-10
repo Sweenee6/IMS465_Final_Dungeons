@@ -21,27 +21,27 @@ public class PlayerController : MonoBehaviour
     private Vector2 aim;
 
     [SerializeField] private Transform FirePoint;
-    [SerializeField] private GameObject SpellPrefab = null;
+    //[SerializeField] private GameObject SpellPrefab = null;
     private float fireRate = 0.25f; // slowdown
     private float canFire = 0.05f; // elapsed time
 
     private UIManager UI = null;
-    //private SpawnManager SM = null;
+    private objectPooler objPooler;
+
     //private GameManager GM = null;
 
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         UI = GameObject.Find("Canvas").GetComponent<UIManager>();
         rb = GetComponent<Rigidbody>();
         UI.UpdateHealth(health, playerNum);
+        objPooler = objectPooler.Instance;
     }
 
     // Update is called once per frame
     void Update()
     {
         handleRotation();
-
     }
 
     private void FixedUpdate()
@@ -61,7 +61,8 @@ public class PlayerController : MonoBehaviour
     {
         if (Time.time > canFire)
         {
-            Instantiate(SpellPrefab, FirePoint.position, FirePoint.rotation);
+            //Instantiate(SpellPrefab, FirePoint.position, FirePoint.rotation);
+            GameObject projectile = objPooler.SpawnFromPool("spell", FirePoint.position, FirePoint.rotation);
 
             canFire = Time.time + fireRate; //shot delay
         }

@@ -31,7 +31,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7906968312788354513}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -20.96, y: 0, z: 8.7}
+  m_LocalPosition: {x: 0, y: 1.62, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -136,11 +136,11 @@ MonoBehaviour:
   enemyHealth: 5
   phase2Health: 0
   shootpoint: {fileID: 0}
-  phase2projectile: {fileID: 0}
+  phase2projectile: 
   throwForce: 0
   Phase2: 0
   startTimeBtwShots: 0
-  goldDrop: {fileID: 4867740065906074230, guid: 1760d39a947edde4eb120467f3219a2d, type: 3}
+  goldDrop: sGold
 --- !u!195 &7906968312788354518
 NavMeshAgent:
   m_ObjectHideFlags: 0

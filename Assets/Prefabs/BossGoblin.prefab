@@ -76,15 +76,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7906968312788354517, guid: c1b393282922f8c46a1c492781cf42ca, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 37.900543
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7906968312788354517, guid: c1b393282922f8c46a1c492781cf42ca, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.7800064
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7906968312788354517, guid: c1b393282922f8c46a1c492781cf42ca, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 6.341877
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7906968312788354517, guid: c1b393282922f8c46a1c492781cf42ca, type: 3}
       propertyPath: m_LocalRotation.w
@@ -120,8 +120,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7906968312788354519, guid: c1b393282922f8c46a1c492781cf42ca, type: 3}
       propertyPath: goldDrop
-      value: 
-      objectReference: {fileID: 3928578702214089852, guid: 2808300b26421ae4481a3828ab5b52bc, type: 3}
+      value: bossGold
+      objectReference: {fileID: 0}
     - target: {fileID: 7906968312788354519, guid: c1b393282922f8c46a1c492781cf42ca, type: 3}
       propertyPath: shootpoint
       value: 
@@ -140,8 +140,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7906968312788354519, guid: c1b393282922f8c46a1c492781cf42ca, type: 3}
       propertyPath: phase2projectile
-      value: 
-      objectReference: {fileID: 7906968312788354513, guid: c1b393282922f8c46a1c492781cf42ca, type: 3}
+      value: goblin
+      objectReference: {fileID: 0}
     - target: {fileID: 7906968312788354519, guid: c1b393282922f8c46a1c492781cf42ca, type: 3}
       propertyPath: startTimeBtwShots
       value: 10
