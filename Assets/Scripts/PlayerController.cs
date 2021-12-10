@@ -62,7 +62,7 @@ public class PlayerController : MonoBehaviour
         if (Time.time > canFire)
         {
             //Instantiate(SpellPrefab, FirePoint.position, FirePoint.rotation);
-            GameObject projectile = objPooler.SpawnFromPool("spell", FirePoint.position, FirePoint.rotation);
+            if (FirePoint != null) { objPooler.SpawnFromPool("spell", FirePoint.position, FirePoint.rotation); }
 
             canFire = Time.time + fireRate; //shot delay
         }

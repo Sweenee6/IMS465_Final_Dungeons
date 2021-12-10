@@ -23,12 +23,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 823146062}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0.613}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0.017119434, z: -0, w: 0.99985355}
+  m_LocalPosition: {x: 0.48901367, y: -0.08000004, z: 0.98264074}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 1}
   m_Children: []
-  m_Father: {fileID: 4499943252609129981}
-  m_RootOrder: 0
+  m_Father: {fileID: 6866202550835327459}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1699103595580465614
 GameObject:
@@ -58,8 +58,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0.017119434, z: -0, w: 0.99985355}
   m_LocalPosition: {x: 0.51, y: -0.08000004, z: 0.37}
   m_LocalScale: {x: 0.2, y: 0.2, z: 1}
-  m_Children:
-  - {fileID: 823146063}
+  m_Children: []
   m_Father: {fileID: 6866202550835327459}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -1.962, z: 0}
@@ -147,6 +146,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4499943252609129981}
+  - {fileID: 823146063}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -295,11 +295,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01aed3cde49eb6649803444e086eb3ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerNum: 0
   cam: {fileID: 0}
   speed: 6
   health: 10
+  startPosition: {fileID: 0}
   controllerDeadzone: 0.1
   gamepadRotateSmoothing: 1000
   isGamepad: 0
   FirePoint: {fileID: 823146063}
-  SpellPrefab: {fileID: 8350011274861404724, guid: 31155d1c661d8bb4f937e4ee058f40ac, type: 3}

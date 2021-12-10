@@ -23,14 +23,18 @@ public class enemyNav : MonoBehaviour, IPooledObject
 
     [SerializeField] private string goldDrop = null;
 
+    [SerializeField]private bool isBoss = false;
+    private UIManager UI = null;
+
     // Start is called before the first frame update
     void Awake()
     {
         rb = this.GetComponent<Rigidbody>();
-        player[0] = GameObject.Find("Player1").transform;
+        player[0] = GameObject.Find("Player").transform;
         player[1] = GameObject.Find("Player2").transform;
-
+        if (isBoss){ UI = GameObject.Find("Canvas").GetComponent<UIManager>(); }
         objPooler = objectPooler.Instance;
+
 
         //timebetweenShots = startTimeBtwShots;
         timebetweenShots = 0f;
@@ -96,7 +100,8 @@ public class enemyNav : MonoBehaviour, IPooledObject
             enemyHealth = enemyHealth - damageAmount;
 
             // Create damage number
-            var EnemyDamNum = (GameObject) Instantiate(damageNumber, new Vector3(transform.position.x, damageNumber.transform.position.y, transform.position.z), damageNumber.transform.rotation);
+            //var EnemyDamNum = (GameObject) Instantiate(damageNumber, new Vector3(transform.position.x, damageNumber.transform.position.y, transform.position.z), damageNumber.transform.rotation);
+            var EnemyDamNum = objPooler.SpawnFromPool("damNum", new Vector3(transform.position.x, damageNumber.transform.position.y, transform.position.z), damageNumber.transform.rotation);
             EnemyDamNum.GetComponent<FloatingNumbers>().damageNumber = damageAmount;
 
             if (enemyHealth <= phase2Health)
@@ -107,6 +112,12 @@ public class enemyNav : MonoBehaviour, IPooledObject
             if (enemyHealth <= 0)
             {
                 objPooler.SpawnFromPool(goldDrop, transform.position, transform.rotation);
+
+                if (isBoss && UI != null)
+                {
+                    UI.showWinText();
+                }
+
                 this.gameObject.SetActive(false);
                 //Destroy(this.gameObject);
             }
@@ -119,9 +130,11 @@ public class enemyNav : MonoBehaviour, IPooledObject
             {
                 int playerDamage = Random.Range(0, 5);
                 P.Damage(playerDamage); // player takes damage 
-                
+
                 //Create Player Damage Number
-                var PlayerDamNum = (GameObject)Instantiate(damageNumber, new Vector3(collision.transform.position.x, damageNumber.transform.position.y, collision.transform.position.z), damageNumber.transform.rotation);
+                //var PlayerDamNum = (GameObject)Instantiate(damageNumber, new Vector3(collision.transform.position.x, damageNumber.transform.position.y, collision.transform.position.z), damageNumber.transform.rotation);
+
+                var PlayerDamNum = objPooler.SpawnFromPool("damNum", new Vector3(collision.transform.position.x, damageNumber.transform.position.y, collision.transform.position.z), damageNumber.transform.rotation);
                 PlayerDamNum.GetComponent<FloatingNumbers>().damageNumber = playerDamage;
 
                 //Destroy(this.gameObject); // enemy

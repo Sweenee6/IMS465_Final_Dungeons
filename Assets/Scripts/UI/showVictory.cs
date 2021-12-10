@@ -5,16 +5,16 @@ using UnityEngine.UI;
 
 public class showVictory : MonoBehaviour
 {
-    [SerializeField] private Text winText;
+    private UIManager UI = null;
 
-    private void Awake()
+    private void start()
     {
-        winText = GameObject.Find("WinText").GetComponent<Text>();
+        UI = GameObject.Find("Canvas").GetComponent<UIManager>();
     }
 
     //When Boss destroyed, show win text
-    private void OnDestroy()
+    private void OnDisable()
     {
-        winText.enabled = true;
+        UI.showWinText();
     }
 }

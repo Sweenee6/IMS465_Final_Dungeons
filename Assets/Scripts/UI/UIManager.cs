@@ -9,6 +9,8 @@ public class UIManager : MonoBehaviour
     private int[] goldScore = new int[] {0,0};
     [SerializeField] private Text[] goldDisplay = null;
 
+    [SerializeField] private GameObject victoryText = null;
+
     //[SerializeField] private GameObject TitleScreen = null;
 
     // Start is called before the first frame update
@@ -30,5 +32,10 @@ public class UIManager : MonoBehaviour
         goldDisplay[pIndex].text = "Gold: " + goldScore[pIndex];
 
         //CheckForHighScore();
+    }
+
+    public void showWinText()
+    {
+        victoryText.SetActive(true);
     }
 }
