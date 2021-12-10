@@ -32,7 +32,7 @@ public class gameManager : MonoBehaviour
         
     }
 
-    public void OnPlayerJoined(GameObject player)
+    public void OnPlayerJoin(GameObject player)
     {
         PlayerController pControl = player.GetComponent<PlayerController>();
         pControl.playerNum = pNum;

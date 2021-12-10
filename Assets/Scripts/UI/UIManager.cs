@@ -6,7 +6,7 @@ public class UIManager : MonoBehaviour
 {
     private int playerhealth = 10;
     [SerializeField] private Text[] healthDisplay = null;
-    private int[] goldScore = new int[] {0,0};
+    private int[] goldScore = new int[] {0,0,0,0};
     [SerializeField] private Text[] goldDisplay = null;
 
     [SerializeField] private GameObject victoryText = null;

@@ -15,6 +15,9 @@ public class showVictory : MonoBehaviour
     //When Boss destroyed, show win text
     private void OnDisable()
     {
-        UI.showWinText();
+        if (UI != null)
+        {
+            UI.showWinText();
+        }
     }
 }

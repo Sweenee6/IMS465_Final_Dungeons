@@ -2949,7 +2949,7 @@ MonoBehaviour:
     prefab: {fileID: 4867740065906074230, guid: 1760d39a947edde4eb120467f3219a2d, type: 3}
     size: 25
   - tag: lGold
-    prefab: {fileID: 4867740065906074230, guid: 1760d39a947edde4eb120467f3219a2d, type: 3}
+    prefab: {fileID: 2046103674499760293, guid: 0e458b627c7724948bff1bbb65808b12, type: 3}
     size: 9
   - tag: bossGold
     prefab: {fileID: 3928578702214089852, guid: 2808300b26421ae4481a3828ab5b52bc, type: 3}

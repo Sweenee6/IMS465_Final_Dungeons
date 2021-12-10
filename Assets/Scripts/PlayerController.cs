@@ -43,7 +43,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        GM.OnPlayerJoined(gameObject);//Set player values
+        GM.OnPlayerJoin(gameObject);//Set player values
         transform.position = startPosition.position;//Start at spawn
     }
 
